@@ -1,10 +1,12 @@
 package edu.jsu.mcis;
 
+import com.oracle.webservices.internal.api.EnvelopeStyle;
+
 public class TicTacToeModel {
     
     private Mark[][] board; /* Game board */
     private boolean xTurn;  /* True if X is current player */
-    private int width;      /* Size of game board */
+    private int width;      /* width of game board */
     
     /* ENUM TYPE DEFINITIONS */
     
@@ -88,8 +90,20 @@ public class TicTacToeModel {
            other player before returning TRUE.  Otherwise, return FALSE. */
         
         // INSERT YOUR CODE HERE
-        
-        return false; // remove this line later!
+        boolean isMarkMade = false;
+
+        if (isValidSquare(row, col) && !isSquareMarked(row, col)) {
+            if(xTurn) {
+                board[row][col] = Mark.X;
+                xTurn = false;
+            }
+            else {
+                board[row][col] = Mark.O;
+                xTurn = true;
+            }
+            isMarkMade = true;
+        }
+        return isMarkMade;
         
     }
 	
@@ -98,8 +112,11 @@ public class TicTacToeModel {
         /* Return TRUE if the specified location is within the bounds of the board */
         
         // INSERT YOUR CODE HERE
-
-        return false; // remove this line later!
+        boolean inBounds = false;
+        if (row < width && col < width){
+            inBounds = true;
+        }
+        return inBounds;
         
     }
 	
@@ -108,8 +125,11 @@ public class TicTacToeModel {
         /* Return TRUE if the square at specified location is marked */
         
         // INSERT YOUR CODE HERE
+        boolean isMarked = false;
+        if (board[row][col] != Mark.EMPTY)
+            isMarked = true;
 
-        return false; // remove this line later!
+        return isMarked; // remove this line later!
             
     }
 	
@@ -118,8 +138,7 @@ public class TicTacToeModel {
         /* Return the mark from the square at the specified location */
         
         // INSERT YOUR CODE HERE
-
-        return null; // remove this line later!
+        return board[row][col];
             
     }
 	
@@ -130,8 +149,17 @@ public class TicTacToeModel {
            value */
         
         // INSERT YOUR CODE HERE
+        if (isMarkWin(Mark.X))
+            return Result.X;
 
-        return null; // remove this line later!
+        else if (isMarkWin(Mark.O))
+            return Result.O;
+
+        else if (isTie())
+            return Result.TIE;
+
+        else 
+            return Result.NONE;
         
     }
 	
@@ -141,8 +169,38 @@ public class TicTacToeModel {
            winner */
         
         // INSERT YOUR CODE HERE
+        boolean isWinner = false;
 
-        return false; // remove this line later!
+        int xHorizSquares = 0;
+        int xVertSquares = 0;
+        int xDiagOneSquares = 0;
+        int xDiagTwoSquares = 0;
+
+        for (int row = 0; row < width; row++) {
+            xHorizSquares = 0;
+            xVertSquares = 0;
+
+            for (int col = 0; col < width; col++) {
+                if (board[row][col] == mark)
+                    xHorizSquares++;
+
+                if (board[col][row] == mark)
+                    xVertSquares++;
+
+                if (xHorizSquares == width || xVertSquares == width )
+                    isWinner = true;
+            }
+            
+            if (board[row][row] == mark)
+                xDiagOneSquares++;
+            
+            if (board[row][width-row-1] == mark)
+                xDiagTwoSquares++;
+
+            if (xDiagOneSquares == width || xDiagTwoSquares == width)
+                isWinner = true;
+        }
+        return isWinner; 
 
     }
 	
@@ -151,8 +209,12 @@ public class TicTacToeModel {
         /* Check the squares of the board to see if the game is a tie */
         
         // INSERT YOUR CODE HERE
+        boolean gameTie = false;
 
-        return false; // remove this line later!
+        if (!isMarkWin(Mark.X) && !isMarkWin(Mark.O) && isGameOver())
+            gameTie = true;
+
+        return gameTie; 
         
     }
 

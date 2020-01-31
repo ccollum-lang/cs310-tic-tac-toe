@@ -1,10 +1,12 @@
 package edu.jsu.mcis;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TicTacToeView {
     
     private final Scanner keyboard;
+    public ArrayList <Integer> location = new ArrayList <Integer>();
     
     /* CONSTRUCTOR */
 	
@@ -22,6 +24,19 @@ public class TicTacToeView {
            Return as a TicTacToeMove object. */
         
         // INSERT YOUR CODE HERE
+
+        if (isXTurn){
+            System.out.println("Player 1 (X) Move:");
+            System.out.print("Enter the row and column numbers, separated by a space: ");
+        }
+
+        else {
+            System.out.println("Player 2 (O) Move:");
+            System.out.print("Enter the row and column numbers, separated by a space: ");
+        }
+
+        location.add(sc.nextInt());
+        location 
 
         return null; // remove this line later!
 
