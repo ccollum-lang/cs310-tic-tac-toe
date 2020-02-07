@@ -78,7 +78,12 @@ public class TicTacToeModel {
         /* Initialize board by filling every square with empty marks */
         
         // INSERT YOUR CODE HERE
-        
+        for (int row = 0; row < width; row++) {
+            for (int col = 0; col < width; col++) {
+                board[row][col] = Mark.EMPTY;
+            }
+        }
+
     }
 	
     public boolean makeMark(int row, int col) {
@@ -141,14 +146,14 @@ public class TicTacToeModel {
         return board[row][col];
             
     }
-	
+
     public Result getResult() {
         
         /* Call "isMarkWin()" to see if X or O is the winner, if the game is a
            TIE, or if the game is not over.  Return the corresponding Result
            value */
-        
-        // INSERT YOUR CODE HERE
+
+        // SUPPLY YOUR CODE HERE
         if (isMarkWin(Mark.X))
             return Result.X;
 
@@ -158,9 +163,9 @@ public class TicTacToeModel {
         else if (isTie())
             return Result.TIE;
 
-        else 
+        else
             return Result.NONE;
-        
+
     }
 	
     private boolean isMarkWin(Mark mark) {
@@ -203,27 +208,40 @@ public class TicTacToeModel {
         return isWinner; 
 
     }
-	
+
     private boolean isTie() {
-        
+
         /* Check the squares of the board to see if the game is a tie */
-        
-        // INSERT YOUR CODE HERE
+
+        // SUPPLY YOUR CODE HERE
         boolean gameTie = false;
 
         if (!isMarkWin(Mark.X) && !isMarkWin(Mark.O) && isGameOver())
             gameTie = true;
 
-        return gameTie; 
-        
+        return gameTie;
+
     }
 
     public boolean isGameOver() {
-        
+
         /* Return TRUE if the game is over */
-        
-        return (Result.NONE != getResult());
-        
+
+        // SUPPLY YOUR CODE HERE
+        boolean gameEnd = true;
+
+        for (int row = 0; row < width; row++) {
+            for (int col = 0; col < width; col++){
+                if (board[row][col] == Mark.EMPTY)
+                    gameEnd = false;
+            }
+        }
+
+        if(isMarkWin(Mark.X) || isMarkWin(Mark.O)){
+            gameEnd = true;
+        }
+        return gameEnd;
+
     }
 
     public boolean isXTurn() {
@@ -254,15 +272,16 @@ public class TicTacToeModel {
         for (int i = 0; i < width; i++) {
             output.append(i);
         }
-        output.append("/n");
+        output.append("\n");
 
         for (int i = 0; i < width; i++) {
+            output.append(i + " ");
             for (int k = 0; k < width; k++) {
-                output.append(i + " " + board[i][k]);
+                output.append(board[i][k]);
             }
-            output.append("/n");
+            output.append("\n");
         }
-        output.append("/n");
+        output.append("\n");
 
 
         return output.toString();
