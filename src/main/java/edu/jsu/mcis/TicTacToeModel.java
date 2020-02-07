@@ -20,7 +20,7 @@ public class TicTacToeModel {
 
         private String message;
         
-        private Mark(String msg) {
+        Mark(String msg) {
             message = msg;
         }
         
@@ -29,7 +29,7 @@ public class TicTacToeModel {
             return message;
         }
         
-    };
+    }
     
     /* Result (represents the final state of the game: X wins, O wins, a TIE,
        or NONE if the game is not yet over) */
@@ -43,7 +43,7 @@ public class TicTacToeModel {
 
         private String message;
         
-        private Result(String msg) {
+        Result(String msg) {
             message = msg;
         }
         
@@ -52,8 +52,8 @@ public class TicTacToeModel {
             return message;
         }
         
-    };
-    
+    }
+
     /* CONSTRUCTOR */
     
     public TicTacToeModel() {
@@ -218,7 +218,7 @@ public class TicTacToeModel {
         
     }
 
-    public boolean isGameover() {
+    public boolean isGameOver() {
         
         /* Return TRUE if the game is over */
         
@@ -250,7 +250,21 @@ public class TicTacToeModel {
         /* Output the board contents as a string (see examples) */
         
         // INSERT YOUR CODE HERE
-        
+
+        for (int i = 0; i < width; i++) {
+            output.append(i);
+        }
+        output.append("/n");
+
+        for (int i = 0; i < width; i++) {
+            for (int k = 0; k < width; k++) {
+                output.append(i + " " + board[i][k]);
+            }
+            output.append("/n");
+        }
+        output.append("/n");
+
+
         return output.toString();
         
     }

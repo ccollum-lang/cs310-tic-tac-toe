@@ -1,12 +1,11 @@
 package edu.jsu.mcis;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeView {
     
     private final Scanner keyboard;
-    public ArrayList <Integer> location = new ArrayList <Integer>();
     
     /* CONSTRUCTOR */
 	
@@ -35,10 +34,11 @@ public class TicTacToeView {
             System.out.print("Enter the row and column numbers, separated by a space: ");
         }
 
-        location.add(sc.nextInt());
-        location 
+        int row = keyboard.nextInt();
+        int col = keyboard.nextInt();
 
-        return null; // remove this line later!
+        TicTacToeMove coordinates = new TicTacToeMove(row, col);
+        return coordinates;
 
     }
 
