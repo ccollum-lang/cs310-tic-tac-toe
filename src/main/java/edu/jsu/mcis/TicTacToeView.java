@@ -1,6 +1,5 @@
 package edu.jsu.mcis;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeView {

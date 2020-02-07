@@ -1,6 +1,6 @@
 package edu.jsu.mcis;
 
-import com.oracle.webservices.internal.api.EnvelopeStyle;
+
 
 public class TicTacToeModel {
     
@@ -117,9 +117,9 @@ public class TicTacToeModel {
         /* Return TRUE if the specified location is within the bounds of the board */
         
         // INSERT YOUR CODE HERE
-        boolean inBounds = false;
-        if (row < width && col < width){
-            inBounds = true;
+        boolean inBounds = true;
+        if (row > width || col > width || row < 0 || col < 0){
+            inBounds = false;
         }
         return inBounds;
         
@@ -131,11 +131,13 @@ public class TicTacToeModel {
         
         // INSERT YOUR CODE HERE
         boolean isMarked = false;
-        if (board[row][col] != Mark.EMPTY)
-            isMarked = true;
-
-        return isMarked; // remove this line later!
-            
+        try {
+            if (board[row][col] != Mark.EMPTY)
+                isMarked = true;
+            return isMarked; // remove this line later!
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return true;
+        }
     }
 	
     public Mark getMark(int row, int col) {
